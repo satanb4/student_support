@@ -25,9 +25,10 @@ The official repository operated under Glasgow University Software Services.
 5. cd into `frontend` and run `npm install`
 
 ## Usage
-1. Run `uvicorn app.main:app --reload`
-2. Visit `http://localhost:8000`
-3. Enjoy!
+1. cd to the root directory
+2. Run `uvicorn app.main:app --reload --port 8080`
+3. Visit `http://localhost:8000`
+4. Enjoy!
 
 ## Contributing
 1. Fork the repository - `git clone`
