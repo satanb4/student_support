@@ -1,0 +1,42 @@
+# MyPath Application
+
+## Description
+The new MyPath project application built from the ground up to be asynchronous and fast 🔥
+The official repository operated under Glasgow University Software Services.
+
+## Stack
+- Python 3.11
+- FastAPI
+- HTMX
+- TailwindCSS+DaisyUI
+- PostgreSQL
+
+## Tools
+- Docker
+- Docker Compose
+- Pytest
+- Gitlab CI/CD
+
+## Installation
+1. Clone the repository
+2. Run `virtualenv venv`
+3. Run `source venv/bin/activate`
+4. Run `pip install -r requirements.txt`
+5. cd into `frontend` and run `npm install`
+
+## Usage
+1. Run `uvicorn app.main:app --reload`
+2. Visit `http://localhost:8000`
+3. Enjoy!
+
+## Contributing
+1. Fork the repository - `git clone`
+2. Create a new branch - `git switch -c feature/branch-name`
+3. Make your changes
+4. Create a pull request - `git push origin feature/branch-name` -> development branch
+5. Wait for approval
+6. Merge your changes
+7. Celebrate 🎉
+
+## Developers
+- [Sayan Bandyopadhyay](https://www.linkedin.com/in/sayan-bandyopadhyay/)

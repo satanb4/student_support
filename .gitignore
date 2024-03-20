@@ -12,3 +12,6 @@ pyenv/
 # Ignore conda environments
 .conda/
 environment.yml
+
+# Ignore node_modules
+node_modules/
