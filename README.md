@@ -25,10 +25,12 @@ The official repository operated under Glasgow University Software Services.
 5. cd into `frontend` and run `npm install`
 
 ## Usage
-1. cd to the root directory
-2. Run `uvicorn app.main:app --reload --port 8080`
-3. Visit `http://localhost:8000`
-4. Enjoy!
+1. cd to tailwindcss/
+2. Run `npx tailwindcss -i ../app/src/css/inputs.css -o ../app/src/css/output.css --watch`
+3. cd to the root directory in different terminal
+4. Run `uvicorn app.main:app --reload --port 8080`
+5. Visit `http://localhost:8000`
+6. Enjoy!
 
 ## Contributing
 1. Fork the repository - `git clone`

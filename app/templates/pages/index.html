@@ -1,9 +1,67 @@
 {% extends "base.html" %}
 
-{% block title %}Home{% endblock title %}
+{% block title %} MyPath {% endblock title %}
 
 {% block content %}
-  <h1>Home</h1>
-  <p>Welcome to the home page!</p>
+<!-- Navigation bar styled with tailwindcss and daisyui with a search bar -->
+<nav class="navbar bg-base-300">
+    <div class="container mx-auto">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center">
+                <a href="/" class="navbar-brand">MyPath</a>
+            </div>
+            <div class="flex items-center">
+                <input
+                    type="text"
+                    class="input input-bordered"
+                    placeholder="Search..."
+                />
+                <details class="dropdown">
+                        <summary class="m-1 btn">open or close</summary>
+                        <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                            <li><a>Item 1</a></li>
+                            <li><a>Item 2</a></li>
+                        </ul>
+                    </details>
+                <button class="btn btn-square btn-ghost">
+                    <svg
+                        xmlns
+                        ="http://www.w3.org/2000/svg"
+                        class="icon icon-tabler icon-tabler-search"
+                        width="32"
+                        height="32"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="#000000"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <circle cx="10" cy="10" r="7" />
+                        <line x1="21" y1="21" x2="15" y2="15" />
+                        </svg>
+                </button>
+                </div>
+        </div>
+        </div>
+</nav>
+
+<div class="grid w-full place-items-center min-h-screen">
+  <div hx-boost="true" class="flex flex-col w-1/2 lg:flex-row">
+    <div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
+        <p>Todo App</p>
+    </div>
+    <div class="divider lg:divider-horizontal">OR</div>
+    <div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
+        <p>Counter App</p>
+    </div>
+  </div>
+  <button hx-post="/clicked" hx-swap="innerHTML" class="btn btn-danger w-64 rounded-full">
+    Click Me
+  </button>
+</div>
+
+
+
 {% endblock content %}
-```
