@@ -1,0 +1,14 @@
+# Ignore python environments
+__pycache__/
+venv/
+pyenv/
+
+# Ignore Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Ignore virtualenv
+.env/
+
+# Ignore conda environments
+.conda/
+environment.yml
