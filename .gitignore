@@ -15,3 +15,6 @@ environment.yml
 
 # Ignore node_modules
 node_modules/
+
+# Ignore the generated CSS build
+app/src/css/output.css
