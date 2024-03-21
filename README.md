@@ -44,3 +44,4 @@ The official repository operated under Glasgow University Software Services.
 
 ## Developers
 - [Sayan Bandyopadhyay](https://www.linkedin.com/in/sayan-bandyopadhyay/)
+- [Finn Lestrange](https://finnlestrange.tech)
