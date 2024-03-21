@@ -23,6 +23,7 @@ The official repository operated under Glasgow University Software Services.
 3. Run `source venv/bin/activate`
 4. Run `pip install -r requirements.txt`
 5. cd into `frontend` and run `npm install`
+6. Run `pre-commit install`
 
 ## Usage
 1. cd to tailwindcss/
