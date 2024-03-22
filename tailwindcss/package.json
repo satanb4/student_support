@@ -4,9 +4,10 @@
     "tailwindcss": "^3.4.1"
   },
   "scripts": {
-    "exec" : "npx tailwindcss -i ../app/src/css/inputs.css -o ../app/src/css/output.css --watch"
+    "exec": "npx tailwindcss -i ../app/src/css/inputs.css -o ../app/src/css/output.css --watch"
   },
   "dependencies": {
+    "heroicons": "^2.1.1",
     "htmx.org": "^1.9.11"
   }
 }

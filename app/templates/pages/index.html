@@ -3,65 +3,66 @@
 {% block title %} MyPath {% endblock title %}
 
 {% block content %}
-<!-- Navigation bar styled with tailwindcss and daisyui with a search bar -->
-<nav class="navbar bg-base-300">
-    <div class="container mx-auto">
-        <div class="flex items-center justify-between">
-            <div class="flex items-center">
-                <a href="/" class="navbar-brand">MyPath</a>
+    <!-- Navigation bar styled with tailwindcss and daisyui with a search bar -->
+    <div id="navbar-container">
+        <!-- Navbar will be loaded here -->
+        {% include 'pages/components/navbar-default.html' %}
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Greeting and Overview -->
+        <h1 class="text-4xl font-bold text-white dark:text-gray-600 mb-6">{% if user %}Hello {{user.username}}, {% else %} Welcome to MyPath {% endif %}</h1>
+        <p class="text-lg dark:text-gray-400 mb-8">
+            Here's an overview of attendance and Moodle interactions in courses that are of interest to you
+        </p>
+
+        <!-- Chart Section -->
+        <div class="card bg-base-100 dark:bg-gray-800 shadow-xl mb-6">
+            <div class="card-body">
+                <h2 class="card-title text-2xl text-gray-800 dark:text-white">
+                    Mathematics 2T: Topics in Discrete Mathematics
+                </h2>
+                <p class="text-gray-200 mb-4">
+                    Moodle interactions in session 2023/2024
+                </p>
+                <!-- Placeholder for actual chart -->
+                <div class="h-60 bg-accent rounded-lg"></div>
             </div>
-            <div class="flex items-center">
-                <input
-                    type="text"
-                    class="input input-bordered"
-                    placeholder="Search..."
-                />
-                <details class="dropdown">
-                    <summary class="m-1 btn">open or close</summary>
-                        <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-                            <li><a>Item 1</a></li>
-                            <li><a>Item 2</a></li>
-                        </ul>
-                    </details>
-                <button class="btn btn-square btn-ghost">
-                    <svg
-                        xmlns
-                        ="http://www.w3.org/2000/svg"
-                        class="icon icon-tabler icon-tabler-search"
-                        width="32"
-                        height="32"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="#000000"
-                        fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <circle cx="10" cy="10" r="7" />
-                        <line x1="21" y1="21" x2="15" y2="15" />
-                        </svg>
-                </button>
+        </div>
+
+        <!-- Information Sections -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Your Advisees -->
+            <div class="card bg-base-100 dark:bg-gray-800 shadow-xl p-4">
+                <div class="card-body">
+                    <h3 class="card-title text-xl text-gray-800 dark:text-white mb-4">Your Advisees</h3>
+                    <p class="text-gray-600 dark:text-gray-300">No advisees found.</p>
                 </div>
-        </div>
-        </div>
-</nav>
+            </div>
 
-<div class="grid w-full place-items-center min-h-screen">
-  <div hx-boost="true" class="flex flex-col w-1/2 lg:flex-row">
-    <div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
-        <p>Todo App</p>
-    </div>
-    <div class="divider lg:divider-horizontal">OR</div>
-    <div class="grid flex-grow h-32 card bg-base-300 rounded-box place-items-center">
-        <p>Counter App</p>
-    </div>
-  </div>
-  <button hx-post="/clicked" hx-swap="innerHTML" class="btn btn-danger w-64 rounded-full">
-    Click Me
-  </button>
-</div>
+            <!-- Your Courses -->
+            <div class="card bg-base-100 dark:bg-gray-800 shadow-xl p-4">
+                <div class="card-body">
+                    <h3 class="card-title text-xl text-gray-800 dark:text-white mb-4">Your Courses</h3>
+                    <p class="text-gray-600 dark:text-gray-300">No courses found.</p>
+                </div>
+            </div>
+        </div>
 
+        <!-- Students needing support -->
+        <div class="card bg-base-100 dark:bg-gray-800 shadow-xl my-6 p-4">
+            <div class="card-body">
+                <h3 class="card-title text-xl text-gray-800 dark:text-white mb-4">Students needing support</h3>
+                <p class="text-gray-600 dark:text-gray-300">No students needing support found.</p>
+            </div>
+        </div>
+
+        <!-- Data updated info -->
+        <div class="text-gray-600 dark:text-gray-300 text-sm">
+            Data updated: 14 days ago
+        </div>
+
+    </div>
 
 
 {% endblock content %}

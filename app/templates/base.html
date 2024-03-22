@@ -10,9 +10,11 @@
 
     <link rel="stylesheet" href="{{ url_for('static', path='css/output.css') }}" />
     <script src="{{ url_for('static', path='js/htmx.min.js') }}"></script>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', path='images/favicon.ico') }}" />
 
     {% block head_extra %}{% endblock head_extra %}
   </head>
-  <body>
+  <body >
     {% block content %}{% endblock content %}
+  </body>
 </html>

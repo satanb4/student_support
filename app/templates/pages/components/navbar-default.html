@@ -1,0 +1,32 @@
+{% if not user %}
+<div class="navbar bg-primary dark:bg-gray-800 rounded">
+  <div class="container flex flex-wrap justify-between items-center mx-aut">
+    <a href="{{url_for('home_view')}}" class="flex items-center">
+      <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+          MyPath<sup class="badge badge-accent badge-sm">BETA</sup>
+      </span>
+    </a>
+  </div>
+  <div class="flex md:order-2">
+    <div class="form-control">
+      <input type="text" placeholder="Search" class="input input-bordered">
+    </div>
+    <div class="dropdown dropdown-end">
+      <button tabindex="0" class="btn btn-round btn-primary">
+        Login
+      </button>
+      <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+        <li>
+          <a class="justify-between">
+            Profile
+            <span class="badge">New</span>
+          </a>
+        </li>
+        <li><a>Settings</a></li>
+        <li><a>Login</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% include 'partials/navigation/navbar-loggedin.html' %}
