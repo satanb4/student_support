@@ -33,6 +33,21 @@ The official repository operated under Glasgow University Software Services.
 5. Visit `http://localhost:8000`
 6. Enjoy!
 
+### IntelliJ / PyCharm Specifics
+If you are using an IntelliJ IDE, you can run the application by creating a new configuration with the following settings:
+
+TailwindCSS:
+- Type: NPM
+- Name: TailwindCSS
+- Command: `run`
+- Script: `exec`
+
+FastAPI:
+- Type: Python
+- Name: FastAPI
+- Module: `uvicorn`
+- Parameters: `app.main:app --reload --port 8080`
+
 ## Contributing
 1. Fork the repository - `git clone`
 2. Create a new branch - `git switch -c feature/branch-name`
