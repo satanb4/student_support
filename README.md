@@ -21,7 +21,7 @@ The official repository operated under Glasgow University Software Services.
 1. Clone the repository
 2. Run `virtualenv venv`
 3. Run `source venv/bin/activate`
-4. Run `pip install -r requirements.txt`
+4. Run `pip install -r requirements/requirements.txt`
 5. cd into `frontend` and run `npm install`
 6. Run `pre-commit install`
 
