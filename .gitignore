@@ -21,3 +21,6 @@ app/src/css/output.css
 
 # Ignore IntelliJ / PyCharm Config Files
 .idea/
+
+# ignore SQLite DB
+*.sqlite3
