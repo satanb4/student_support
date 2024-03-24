@@ -6,10 +6,14 @@ from app.core.config import templates
 
 # -- Fetching Test Data -- #
 from app.backend.db.operations import users
+from app.backend.stats.graphs import create_data
 
 # -- END -- #
 
 router = APIRouter()
+
+plot = create_data()
+print(plot)
 
 
 @router.get("/", response_class=HTMLResponse)
@@ -32,6 +36,14 @@ async def login(request: Request, id: int):
             )
     else:
         return RedirectResponse("/", status_code=303)
+
+
+@router.get("/graph", response_class=HTMLResponse)
+async def graph_view(request: Request):
+    return templates.TemplateResponse(
+        "partials/graphs/test_plot.html",
+        {"request": request},
+    )
 
 
 @router.post("/clicked", response_class=HTMLResponse)

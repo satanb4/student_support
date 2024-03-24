@@ -24,3 +24,6 @@ app/src/css/output.css
 
 # ignore SQLite DB
 *.sqlite3
+
+# Ignore graphs generated on runtime
+graphs/*.html

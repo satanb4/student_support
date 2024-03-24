@@ -5,8 +5,9 @@
 
 from pydantic import BaseModel, Field
 
-
 # -- This is just for Testing purposes --
+
+
 class userModel(BaseModel):
     # Sample model to use until we have a database
     id: int
@@ -27,3 +28,4 @@ users = [
     ),
 ]
 # -- This is just for Testing purposes --
+# -- END -- #

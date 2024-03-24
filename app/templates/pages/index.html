@@ -26,8 +26,10 @@
                 <p class="text-gray-200 mb-4">
                     Moodle interactions in session 2023/2024
                 </p>
+                <button class="btn btn-primary" hx-get="{{url_for('graph_view')}}" hx-trigger="click" hx-target="#graph-placeholder" hx-swap="innerHTML">View full report</button>
                 <!-- Placeholder for actual chart -->
-                <div class="h-60 bg-accent rounded-lg"></div>
+                <div class="h-200 bg-accent rounded-lg" id="graph-placeholder">
+                </div>
             </div>
         </div>
 

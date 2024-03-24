@@ -16,9 +16,12 @@ SECRET_KEY = config("SECRET_KEY", default="secret")
 
 DEBUG = config("DEBUG", cast=bool, default=False)
 
-ALLOWED_HOSTS: List[str] = config("ALLOWED_HOSTS", cast=CommaSeparatedStrings, default="")
+ALLOWED_HOSTS: List[str] = config(
+    "ALLOWED_HOSTS", cast=CommaSeparatedStrings, default=""
+)
 
-templates = Jinja2Templates(directory="app/templates")
+template_base_dir = f"app/templates"
+templates = Jinja2Templates(directory=template_base_dir)
 
 # Database
 # DATABASE_URL = config("DATABASE_URL", default="postgresql+asyncpg://postgres:postgres@db:5432/mydatabase")
