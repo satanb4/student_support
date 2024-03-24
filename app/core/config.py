@@ -1,3 +1,8 @@
+# title: config.py
+# Author: Sayan Bandyopadhyay
+# Date: 2024-03-24 20:02:50
+# Description: This file contains the configuration settings for the FastAPI application.
+
 from typing import List
 from pathlib import Path
 

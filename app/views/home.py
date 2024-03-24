@@ -1,3 +1,8 @@
+# title: home.py
+# Author: Sayan Bandyopadhyay
+# Date: 2024-03-24 20:03:22
+# Description: This file contains the views that are required for Home Page of the FastAPI application.
+
 from fastapi import APIRouter
 from fastapi import Request
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -11,9 +16,6 @@ from app.backend.stats.graphs import create_data
 # -- END -- #
 
 router = APIRouter()
-
-plot = create_data()
-print(plot)
 
 
 @router.get("/", response_class=HTMLResponse)
@@ -40,15 +42,8 @@ async def login(request: Request, id: int):
 
 @router.get("/graph", response_class=HTMLResponse)
 async def graph_view(request: Request):
+    plot = create_data()
     return templates.TemplateResponse(
-        "partials/graphs/test_plot.html",
-        {"request": request},
-    )
-
-
-@router.post("/clicked", response_class=HTMLResponse)
-async def clicked_view(request: Request):
-    return templates.TemplateResponse(
-        "partials/clicked.html",
+        str(plot),
         {"request": request},
     )

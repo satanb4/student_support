@@ -26,10 +26,10 @@
                 <p class="text-gray-200 mb-4">
                     Moodle interactions in session 2023/2024
                 </p>
-                <button class="btn btn-primary" hx-get="{{url_for('graph_view')}}" hx-trigger="click" hx-target="#graph-placeholder" hx-swap="innerHTML">View full report</button>
+                <button class="btn btn-primary mb-4" hx-get="{{url_for('graph_view')}}" hx-trigger="click" hx-target="#graph-placeholder" hx-swap="innerHTML" hx-indicator="#indicator">View full report</button>
                 <!-- Placeholder for actual chart -->
-                <div class="h-200 bg-accent rounded-lg" id="graph-placeholder">
-                </div>
+                <div id="indicator" class="htmx-indicator"><span class="loading loading-ring loading-lg"></span></div>
+                <div class="h-400 bg-accent rounded-lg" id="graph-placeholder"></div>
             </div>
         </div>
 

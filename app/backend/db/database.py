@@ -1,3 +1,8 @@
+# title: database.py
+# Author: Sayan Bandyopadhyay
+# Date: 2024-03-24 20:03:07
+# Description: This file contains the database handler for the FastAPI application.
+
 from pathlib import Path
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
