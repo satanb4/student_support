@@ -3,7 +3,7 @@
 # Date: 2024-03-24 20:03:44
 # Description: This file contains graphing functionality for data parsed from backend
 
-import numpy as np
+import polars as pl
 import plotly.express as px
 from pathlib import Path
 from jinja2 import Template
