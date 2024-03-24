@@ -28,7 +28,7 @@
                 </p>
                 <button class="btn btn-primary mb-4" hx-get="{{url_for('graph_view')}}" hx-trigger="click" hx-target="#graph-placeholder" hx-swap="innerHTML" hx-indicator="#indicator">View full report</button>
                 <!-- Placeholder for actual chart -->
-                <div id="indicator" class="htmx-indicator"><span class="loading loading-ring loading-lg"></span></div>
+                <div class="htmx-indicator" id="indicator"><div class="skeleton w-100 h-32"></div> </div>
                 <div class="h-400 bg-accent rounded-lg" id="graph-placeholder"></div>
             </div>
         </div>
