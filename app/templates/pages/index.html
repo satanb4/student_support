@@ -12,56 +12,59 @@
 
     <div class="container mx-auto px-4 py-8">
         <!-- Greeting and Overview -->
-        <h1 class="text-4xl font-bold text-white dark:text-gray-200 mb-6">{% if user %}Hello {{user.username}}, {% else %} Welcome to MyPath {% endif %}</h1>
-        <p class="text-lg dark:text-gray-200 mb-8">
-            Here's an overview of attendance and Moodle interactions in courses that are of interest to you
-        </p>
+        <h1 class="text-4xl font-bold text-white dark:text-gray-200 mb-6">{% if user %}Hello {{ user.username }}
+            , {% else %} Welcome to MyPath {% endif %}</h1>
+        {% if user %}
+            <p class="text-lg dark:text-gray-200 mb-8">
+                Here's an overview of attendance and Moodle interactions in courses that are of interest to you
+            </p>
 
-        <!-- Chart Section -->
-        <div class="card bg-base-100 dark:bg-gray-800 shadow-xl mb-6">
-            <div class="card-body">
-                <h2 class="card-title text-2xl text-gray-800 dark:text-white">
-                    Mathematics 2T: Topics in Discrete Mathematics
-                </h2>
-                <p class="text-gray-200 mb-4">
-                    Moodle interactions in session 2023/2024
-                </p>
-                <!-- Placeholder for actual chart -->
-                <div class="h-60 bg-accent rounded-lg"></div>
-            </div>
-        </div>
-
-        <!-- Information Sections -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Your Advisees -->
-            <div class="card bg-base-100 dark:bg-gray-800 shadow-xl p-4">
+            <!-- Chart Section -->
+            <div class="card bg-base-100 dark:bg-gray-800 shadow-xl mb-6">
                 <div class="card-body">
-                    <h3 class="card-title text-xl text-gray-800 dark:text-white mb-4">Your Advisees</h3>
-                    <p class="text-gray-600 dark:text-gray-300">No advisees found.</p>
+                    <h2 class="card-title text-2xl text-gray-800 dark:text-white">
+                        Mathematics 2T: Topics in Discrete Mathematics
+                    </h2>
+                    <p class="text-gray-200 mb-4">
+                        Moodle interactions in session 2023/2024
+                    </p>
+                    <!-- Placeholder for actual chart -->
+                    <div class="h-60 bg-accent rounded-lg"></div>
                 </div>
             </div>
 
-            <!-- Your Courses -->
-            <div class="card bg-base-100 dark:bg-gray-800 shadow-xl p-4">
-                <div class="card-body">
-                    <h3 class="card-title text-xl text-gray-800 dark:text-white mb-4">Your Courses</h3>
-                    <p class="text-gray-600 dark:text-gray-300">No courses found.</p>
+            <!-- Information Sections -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Your Advisees -->
+                <div class="card bg-base-100 dark:bg-gray-800 shadow-xl p-4">
+                    <div class="card-body">
+                        <h3 class="card-title text-xl text-gray-800 dark:text-white mb-4">Your Advisees</h3>
+                        <p class="text-gray-600 dark:text-gray-300">No advisees found.</p>
+                    </div>
+                </div>
+
+                <!-- Your Courses -->
+                <div class="card bg-base-100 dark:bg-gray-800 shadow-xl p-4">
+                    <div class="card-body">
+                        <h3 class="card-title text-xl text-gray-800 dark:text-white mb-4">Your Courses</h3>
+                        <p class="text-gray-600 dark:text-gray-300">No courses found.</p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Students needing support -->
-        <div class="card bg-base-100 dark:bg-gray-800 shadow-xl my-6 p-4">
-            <div class="card-body">
-                <h3 class="card-title text-xl text-gray-800 dark:text-white mb-4">Students needing support</h3>
-                <p class="text-gray-600 dark:text-gray-300">No students needing support found.</p>
+            <!-- Students needing support -->
+            <div class="card bg-base-100 dark:bg-gray-800 shadow-xl my-6 p-4">
+                <div class="card-body">
+                    <h3 class="card-title text-xl text-gray-800 dark:text-white mb-4">Students needing support</h3>
+                    <p class="text-gray-600 dark:text-gray-300">No students needing support found.</p>
+                </div>
             </div>
-        </div>
 
-        <!-- Data updated info -->
-        <div class="text-gray-600 dark:text-gray-300 text-sm">
-            Data updated: 14 days ago
-        </div>
+            <!-- Data updated info -->
+            <div class="text-gray-600 dark:text-gray-300 text-sm">
+                Data updated: 14 days ago
+            </div>
+        {% endif %}
 
     </div>
 
