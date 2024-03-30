@@ -11,7 +11,7 @@ from app.core.config import templates
 
 # -- Fetching Test Data -- #
 from app.backend.db.operations import users
-from app.backend.stats.graphs import create_data
+from app.backend.stats import graphs
 
 # -- END -- #
 
@@ -42,7 +42,7 @@ async def login(request: Request, id: int):
 
 @router.get("/graph", response_class=HTMLResponse)
 async def graph_view(request: Request):
-    plot = create_data()
+    plot = graphs.gdp_data()
     return templates.TemplateResponse(
         str(plot),
         {"request": request},

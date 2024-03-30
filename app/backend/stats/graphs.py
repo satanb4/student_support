@@ -6,53 +6,33 @@
 import polars as pl
 import plotly.express as px
 from pathlib import Path
-from jinja2 import Template
 
-from app.core.config import template_base_dir
-
-
-# This is a decorator to generate a graph template given a plotly figure
-def create_graph(file_name=None) -> str:
-    def generate_graph(func):
-        def wrapper(*args, **kwargs):
-            fig = func(*args, **kwargs)
-            fig.update_layout(template="plotly_dark")
-            template_path = Path(template_base_dir, file_name)
-            template = {
-                "fig": fig.to_html(
-                    full_html=False,
-                )
-            }
-            with open(template_path, "w+", encoding="utf-8") as f:
-                f.write(
-                    Template(
-                        """
-                <div class="container">
-                    {{ fig | safe }}
-                </div>
-                """
-                    ).render(template)
-                )
-            return file_name
-
-        return wrapper
-
-    return generate_graph
-
+from app.backend.stats.utils import create_graph
 
 # This is a sample function to create a scatter plot
-plot_path = Path("partials/graphs/test_plot.html")
+plot_path1 = Path("partials/graphs/test_plot.html")
+plot_path2 = Path("partials/graphs/test_plot2.html")
 
 
-@create_graph(file_name=plot_path)
-def create_data() -> px.line:
-    df = px.data.gapminder().query("country in ['Canada', 'Botswana']")
+@create_graph(file_name=plot_path1)
+def gdp_data(data=None) -> px.line:
+    # This is a sample function to create a scatter plot
+    df = px.data.gapminder().query(
+        "country in ['United Kingdom', 'India', 'China', 'Canada']"
+    )
 
     fig = px.line(df, x="lifeExp", y="gdpPercap", color="country", text="year")
-    fig.update_traces(textposition="bottom right")
+    # fig.update_traces(textposition="bottom right", textfont_size=8)
+    fig.update_layout(
+        uniformtext_minsize=8,
+        uniformtext_mode="hide",
+        title="Life Expectancy vs GDP per Capita",
+        template="ggplot2",
+        margin=dict(l=20, r=150, t=80, b=50),
+    )
     return fig
 
 
 if __name__ == "__main__":
-    fig = create_data()
+    fig = gdp_data()
     print(fig)
