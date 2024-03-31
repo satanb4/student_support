@@ -1,59 +1,25 @@
-# title: database.py
-# Author: Sayan Bandyopadhyay
-# Date: 2024-03-24 20:03:07
-# Description: This file contains the database handler for the FastAPI application.
+import os
 
-from pathlib import Path
-from sqlalchemy import create_engine
+from sqlmodel import SQLModel, create_engine
+from sqlmodel.ext.asyncio.session import AsyncSession, AsyncEngine
+
 from sqlalchemy.orm import sessionmaker
 
-
-class DbHandler:
-    """
-    Database handler class
-    :param url: Database URL
-    :type url: str
-    """
-
-    def __init__(self, url: str):
-        if not url:
-            raise ValueError("Database URL is not set")
-        if url.startswith("sqlite"):
-            self.engine = create_engine(
-                url,
-                connect_args={
-                    "check_same_thread": False
-                },  # check_same_thread is only for SQLite
-            )
-        else:
-            self.engine = create_engine(url, connect_args={"check_same_thread": True})
-        self.SessionLocal = sessionmaker(
-            autocommit=False, autoflush=False, bind=self.engine
-        )
-        self.base = None
-
-    def get_db(self):
-        """
-        Get a database session
-        :return: Database session
-        """
-        db = self.SessionLocal()
-        try:
-            yield db
-        finally:
-            db.close()
-
-    def create_all(self, base):
-        """
-        Create all tables in the database
-        :param base: SQLAlchemy base object
-        """
-        self.base = base
-        self.base.metadata.create_all(bind=self.engine)
+from app.core.config import settings
 
 
-if __name__ == "__main__":
-    path = Path(__file__).parent / "test.sqlite3"
-    SQLALCHEMY_DATABASE_URL = f"sqlite:///{path}"
-    # SQLALCHEMY_DATABASE_URL = "postgresql://user:password@postgresserver/db"
-    db = DbHandler(SQLALCHEMY_DATABASE_URL)
+DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///test.db")
+
+engine = AsyncEngine(create_engine(DATABASE_URL, echo=True, future=True))
+
+
+async def init_db():
+    async with engine.begin() as conn:
+        # await conn.run_sync(SQLModel.metadata.drop_all)
+        await conn.run_sync(SQLModel.metadata.create_all)
+
+
+async def get_session() -> AsyncSession:
+    async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+    async with async_session() as session:
+        yield session

@@ -42,7 +42,7 @@ async def login(request: Request, id: int):
 
 @router.get("/graph", response_class=HTMLResponse)
 async def graph_view(request: Request):
-    plot = graphs.gdp_data()
+    plot = graphs.grade_data()
     return templates.TemplateResponse(
         str(plot),
         {"request": request},

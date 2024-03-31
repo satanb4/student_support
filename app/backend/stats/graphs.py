@@ -3,6 +3,7 @@
 # Date: 2024-03-24 20:03:44
 # Description: This file contains graphing functionality for data parsed from backend
 
+import numpy as np
 import polars as pl
 import plotly.express as px
 from pathlib import Path
@@ -15,18 +16,28 @@ plot_path2 = Path("partials/graphs/test_plot2.html")
 
 
 @create_graph(file_name=plot_path1)
-def gdp_data(data=None) -> px.line:
+def grade_data(data=None) -> px.scatter:
     # This is a sample function to create a scatter plot
-    df = px.data.gapminder().query(
-        "country in ['United Kingdom', 'India', 'China', 'Canada']"
+    num_rows = 200
+    rng = np.random.default_rng(seed=7)
+    students_data = {
+        "Grade": rng.exponential(scale=10, size=num_rows),
+        "Year": rng.integers(low=1995, high=2023, size=num_rows),
+        "School": rng.choice(
+            ["Engineering", "Social Science", "English"], size=num_rows
+        ),
+    }
+    students = pl.DataFrame(students_data)
+    fig = px.scatter(
+        students,
+        x="Grade",
+        y="Year",
+        color="School",
+        title="Grade vs Year",
     )
-
-    fig = px.line(df, x="lifeExp", y="gdpPercap", color="country", text="year")
-    # fig.update_traces(textposition="bottom right", textfont_size=8)
     fig.update_layout(
         uniformtext_minsize=8,
         uniformtext_mode="hide",
-        title="Life Expectancy vs GDP per Capita",
         template="ggplot2",
         margin=dict(l=20, r=150, t=80, b=50),
     )
