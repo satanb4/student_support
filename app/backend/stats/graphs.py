@@ -5,7 +5,7 @@
 
 import numpy as np
 import polars as pl
-import plotly.express as px
+import plotly.graph_objects as go
 from pathlib import Path
 
 from app.backend.stats.utils import create_graph
@@ -16,7 +16,7 @@ plot_path2 = Path("partials/graphs/test_plot2.html")
 
 
 @create_graph(file_name=plot_path1)
-def grade_data(data=None) -> px.scatter:
+def grade_data(data: pl.DataFrame = None) -> go.Figure:
     # This is a sample function to create a scatter plot
     num_rows = 200
     rng = np.random.default_rng(seed=7)
@@ -28,22 +28,25 @@ def grade_data(data=None) -> px.scatter:
         ),
     }
     students = pl.DataFrame(students_data)
-    fig = px.scatter(
-        students,
-        x="Grade",
-        y="Year",
-        color="School",
-        title="Grade vs Year",
-    )
+    fig = go.Figure()
+    for school in students["School"].unique().to_list():
+        school_data = students.filter(students["School"] == school)
+        fig.add_trace(
+            go.Scatter(
+                x=school_data["Year"],
+                y=school_data["Grade"],
+                mode="markers",
+                name=school,
+            )
+        )
     fig.update_layout(
-        uniformtext_minsize=8,
-        uniformtext_mode="hide",
-        template="ggplot2",
-        margin=dict(l=20, r=150, t=80, b=50),
+        title="Student Grades Over the Years",
+        xaxis_title="Year",
+        yaxis_title="Grade",
     )
     return fig
 
 
 if __name__ == "__main__":
-    fig = gdp_data()
+    fig = grade_data()
     print(fig)
