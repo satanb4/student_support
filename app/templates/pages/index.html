@@ -12,8 +12,7 @@
 
     <div class="container mx-auto px-4 py-8">
         <!-- Greeting and Overview -->
-        <h1 class="text-4xl font-bold text-white dark:text-gray-200 mb-6">{% if user %}Hello {{ user.username }}
-            , {% else %} Welcome to MyPath {% endif %}</h1>
+        <h1 class="text-4xl font-bold text-white dark:text-gray-200 mb-6">{% if user %}Hello {{ user.username }}, {% else %} Welcome to MyPath {% endif %}</h1>
         {% if user %}
             <p class="text-lg dark:text-gray-200 mb-8">
                 Here's an overview of attendance and Moodle interactions in courses that are of interest to you
@@ -31,22 +30,6 @@
                 {% include 'pages/components/graph-selector.html' %}
             </div>
         </div>
-
-        <!-- Information Sections -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Your Advisees -->
-            <div class="card bg-base-100 dark:bg-gray-800 shadow-xl p-4">
-                <div class="card-body">
-                    <h2 class="card-title text-2xl text-gray-800 dark:text-white">
-                        Mathematics 2T: Topics in Discrete Mathematics
-                    </h2>
-                    <p class="text-gray-200 mb-4">
-                        Moodle interactions in session 2023/2024
-                    </p>
-                    <!-- Placeholder for actual chart -->
-                    <div class="h-60 bg-accent rounded-lg"></div>
-                </div>
-            </div>
 
             <!-- Information Sections -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
