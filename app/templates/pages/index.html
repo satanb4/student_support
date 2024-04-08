@@ -12,10 +12,10 @@
 
     <div class="container mx-auto px-4 py-8">
         <!-- Greeting and Overview -->
-        <h1 class="text-4xl font-bold text-white dark:text-gray-200 mb-6">{% if user %}Hello {{ user.username }}
+        <h1 class="text-4xl font-bold text-base-100 dark:base-100 mb-6">{% if user %}Hello {{ user.username }}
             , {% else %} Welcome to MyPath {% endif %}</h1>
         {% if user %}
-            <p class="text-lg dark:text-gray-200 mb-8">
+            <p class="text-lg text-base-100 dark:text-base-100 mb-8">
                 Here's an overview of attendance and Moodle interactions in courses that are of interest to you
             </p>
 
@@ -61,7 +61,7 @@
             </div>
 
             <!-- Data updated info -->
-            <div class="text-gray-600 dark:text-gray-300 text-sm">
+            <div class="text-base-100 dark:text-base-100 text-sm">
                 Data updated: 14 days ago
             </div>
         {% endif %}

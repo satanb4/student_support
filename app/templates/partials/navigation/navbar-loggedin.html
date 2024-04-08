@@ -1,5 +1,5 @@
 {% if user %}
-    <div class="navbar bg-primary dark:bg-gray-800 rounded" data-theme="forest">
+    <div class="navbar bg-secondary dark:bg-primary rounded" >
         <div class="container flex flex-wrap justify-between items-center mx-auto">
             <a href="{{ url_for('home_view') }}" class="flex items-center">
             <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
@@ -13,7 +13,7 @@
                 </div>
 
                 <!-- Profile dropdown -->
-                <div class="dropdown dropdown-end">
+                <div class="dropdown dropdown-end test-white dark:text-white">
                     <div onclick="this.parentElement.classList.toggle('dropdown-open');document.activeElement.blur()">
                         <label tabindex="0" class="btn btn-accent m-1">{{ user.username }}
                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24"
@@ -33,7 +33,7 @@
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
-                    <input type="checkbox" value="light" class="toggle theme-controller"/>
+                    <input type="checkbox" value="myPathLight" class="toggle theme-controller"/>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"/>
@@ -42,7 +42,7 @@
                 </label>
             </div>
 
-            <div class="flex-1">
+            <div class="flex-1 text-white dark:text-white">
                 <ul class="menu menu-horizontal pl-10">
                     <li>
                         <a href="#"
