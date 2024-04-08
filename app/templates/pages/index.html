@@ -12,20 +12,20 @@
 
     <div class="container mx-auto px-4 py-8">
         <!-- Greeting and Overview -->
-        <h1 class="text-4xl font-bold text-base-100 dark:base-100 mb-6">{% if user %}Hello {{ user.username }}
+        <h1 class="text-4xl font-bold text-base-content mb-6">{% if user %}Hello {{ user.username }}
             , {% else %} Welcome to MyPath {% endif %}</h1>
         {% if user %}
-            <p class="text-lg text-base-100 dark:text-base-100 mb-8">
+            <p class="text-lg text-base-content mb-8">
                 Here's an overview of attendance and Moodle interactions in courses that are of interest to you
             </p>
 
             <!-- Chart Section -->
-            <div class="card bg-base-100 dark:bg-gray-800 shadow-xl mb-6">
+            <div class="card bg-neutral-content shadow-xl mb-6">
                 <div class="card-body">
-                    <h2 class="card-title text-2xl text-gray-800 dark:text-white">
+                    <h2 class="card-title text-2xl text-base-content">
                         Mathematics 2T: Topics in Discrete Mathematics
                     </h2>
-                    <p class="text-gray-200 mb-4">
+                    <p class="text-neutral mb-4">
                         Moodle interactions in session 2023/2024
                     </p>
                     <!-- Placeholder for actual chart -->
@@ -36,31 +36,53 @@
             <!-- Information Sections -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Your Advisees -->
-                <div class="card bg-base-100 dark:bg-gray-800 shadow-xl p-4">
+                <div class="card bg-neutral-content shadow-xl p-4">
                     <div class="card-body">
-                        <h3 class="card-title text-xl text-gray-800 dark:text-white mb-4">Your Advisees</h3>
-                        <p class="text-gray-600 dark:text-gray-300">No advisees found.</p>
+                        <h3 class="card-title text-xl text-base-content mb-4">Your Advisees</h3>
+                        <div role="alert" class="alert alert-error">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
+                                 viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                            </svg>
+                            <span>Warning: No advisees found!</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Your Courses -->
-                <div class="card bg-base-100 dark:bg-gray-800 shadow-xl p-4">
+                <div class="card bg-neutral-content shadow-xl p-4">
                     <div class="card-body">
-                        <h3 class="card-title text-xl text-gray-800 dark:text-white mb-4">Your Courses</h3>
-                        <p class="text-gray-600 dark:text-gray-300">No courses found.</p>
+                        <h3 class="card-title text-xl text-base-content mb-4">Your Courses</h3>
+                        <div role="alert" class="alert alert-info">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                 class="stroke-current shrink-0 w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>No courses found. . .</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Students needing support -->
-            <div class="card bg-base-100 dark:bg-gray-800 shadow-xl my-6 p-4">
+            <div class="card bg-neutral-content shadow-xl my-6 p-4">
                 <div class="card-body">
-                    <h3 class="card-title text-xl text-gray-800 dark:text-white mb-4">Students needing support</h3>
-                    <p class="text-gray-600 dark:text-gray-300">No students needing support found.</p>
+                    <h3 class="card-title text-xl text-base-content mb-4">Students needing support</h3>
+                    <p class="text-base-content">No students needing support found.</p>
                 </div>
             </div>
 
             <!-- Data updated info -->
+            <div role="alert" class="alert">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                     class="stroke-info shrink-0 w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>Data updated: 14 days ago.</span>
+            </div>
             <div class="text-base-100 dark:text-base-100 text-sm">
                 Data updated: 14 days ago
             </div>

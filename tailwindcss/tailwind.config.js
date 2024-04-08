@@ -10,25 +10,8 @@ module.exports = {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ['forest', 'light',
+    themes: [
       {
-        myPathDark: {
-          "color-scheme": "dark",
-          "primary": "#023660",
-          "primary-content": "#03223b",
-          "secondary": "#068af0",
-          "secondary-content": "#fff",
-          "accent": "#eab218",
-          "neutral": "#2b323b",
-          "neutral-content": "#a0a6b4",
-          "base-100": "#2b323b",
-          "base-200": "#1a1f24",
-          "base-300": "#161a20",
-          "info": "#00aefc",
-          "success": "#00a36c",
-          "warning": "#feb700",
-          "error": "#ff565e",
-        },
         myPathLight: {
           "color-scheme": "light",
           "primary": "#04365e",
@@ -47,7 +30,6 @@ module.exports = {
           "error": "#ff565e",
         }
       }], // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
-    darkTheme: 'myPathDark', // name of one of the included themes for dark mode
     base: true, // applies background color and foreground color for root element by default
     styled: true, // include daisyUI colors and design decisions for all components
     utils: true, // adds responsive and modifier utility classes
