@@ -37,14 +37,15 @@ The official repository operated under Glasgow University Software Services.
 - Run the postgres database:- <br>
 `sudo docker run --name mypath_db -v /var/lib/postgresql/data:/var/lib/postgresql/data -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=mypath -p 5432:5432 -d postgres:16`
 
-```
-## Creating Migrations (Initial) - DO NOT RUN
-- Create the migrations folder:- `alembic init -t async migrations`
-- Generate a migration:- `alembic revision --autogenerate -m "Initial migration"`
-```
 
 ## Running Migrations (Developer)
 - Run the migration:- `alembic upgrade head`
+
+```
+Creating Migrations (Initial) - DO NOT RUN
+- Create the migrations folder:- `alembic init -t async migrations`
+- Generate a migration:- `alembic revision --autogenerate -m "Initial migration"`
+```
 
 ### IntelliJ / PyCharm Specifics
 If you are using an IntelliJ IDE, you can run the application by creating a new configuration with the following settings:
