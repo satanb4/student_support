@@ -30,6 +30,9 @@ class User(SQLModel, table=True):
 
 
 class Courses(SQLModel, table=True):
+    """
+    Model class to define the Courses Table in the Database.
+    """
     id: Optional[int] = Field(default=None, primary_key=True)
     course_name: str
     course_code: str
