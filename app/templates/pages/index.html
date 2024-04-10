@@ -13,7 +13,7 @@
     <div class="container mx-auto px-4 py-8">
         <!-- Greeting and Overview -->
         <h1 class="text-4xl font-bold text-base-content mb-6">{% if user %}Hello {{ user.username }}
-            , {% else %} Welcome to MyPath {% endif %}</h1>
+            , {% endif %}</h1>
         {% if user %}
             <p class="text-lg text-base-content mb-8">
                 Here's an overview of attendance and Moodle interactions in courses that are of interest to you
@@ -83,8 +83,33 @@
                 </svg>
                 <span>Data updated: 14 days ago.</span>
             </div>
-            <div class="text-base-100 dark:text-base-100 text-sm">
-                Data updated: 14 days ago
+        {% else %}
+            <div class="hero h-700 bg-base-200 rounded-2xl">
+                <div class="hero-content text-center">
+                    <div class="max-w-3xl">
+                        <h1 class="text-5xl font-bold pb-5">Welcome to MyPath</h1>
+                        <div role="alert" class="alert alert-error">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
+                                 viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>You may have been signed out due to inactivity or by accessing this site in an unexpected way. To access the full features of this site, you must be authenticated with Shibboleth/SSO.</span>
+                        </div>
+                        <!-- Include any additional elements like buttons if needed -->
+                        <div class="pt-5">
+                            <a href="/user/1"
+                               class="btn btn-primary btn-md text-base-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                          d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"></path>
+                                </svg>
+
+                                Login with Shibboleth</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         {% endif %}
 
