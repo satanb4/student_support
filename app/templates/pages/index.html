@@ -28,11 +28,10 @@
                     <p class="text-neutral mb-4">
                         Moodle interactions in session 2023/2024
                     </p>
-                    <!-- Placeholder for actual chart -->
-                    <div class="h-60 bg-accent rounded-lg"></div>
+                    {% include 'pages/components/graph-selector.html' %}
                 </div>
             </div>
-        </div>
+
 
             <!-- Information Sections -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -84,6 +83,7 @@
                 </svg>
                 <span>Data updated: 14 days ago.</span>
             </div>
+        </div>
         {% else %}
             <div class="hero h-700 bg-base-200 rounded-2xl">
                 <div class="hero-content text-center">
