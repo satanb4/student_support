@@ -28,13 +28,17 @@
                     </div>
                     <!-- Profile dropdown -->
                     <div class="dropdown dropdown-end text-neutral ">
-                        <label tabindex="0" class="btn btn-secondary m-1">{{ user.username }}
-                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                <path strokeLinecap="round" stroke-linejoin="round" strokeWidth="2"
-                                        d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </label>
+                        <div
+                            onClick="this.parentElement.classList.toggle('dropdown-open');document.activeElement.blur()"
+                        >
+                            <label tabindex="0" class="btn btn-secondary m-1">{{ user.username }}
+                                <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path strokeLinecap="round" stroke-linejoin="round" strokeWidth="2"
+                                          d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </label>
+                        </div>
                         <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                             <li><a>Profile <span class="badge badge-accent badge-xs"></span></a></li>
                             <li><a>Settings</a></li>
@@ -103,7 +107,7 @@
         </div>
     </div>
     <div class="drawer-side z-[100]">
-        <label for="nav-drawer" aria-label="close sidebar" class="drawer-overlay"></label> 
+        <label for="nav-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
         <ul class="menu p-4 w-80 min-h-full bg-neutral-content text-base-content">
         <!-- Sidebar content here -->
         <li><a>
