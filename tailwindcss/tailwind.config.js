@@ -16,7 +16,7 @@ module.exports = {
           "color-scheme": "light",
           "primary": "#04365e",
           "primary-content": "#074e88",
-          "secondary": "#377cfb",
+          "secondary": "#0d6bb9",
           "secondary-content": "#fff",
           "accent": "#f4b913",
           "accent-content": "#000",

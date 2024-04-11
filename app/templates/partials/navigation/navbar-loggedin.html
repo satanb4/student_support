@@ -1,15 +1,10 @@
 {% if user %}
 
 <div class="drawer">
-    <input id="nav-drawer" type="checkbox" class="drawer-toggle" /> 
+    <input id="nav-drawer" type="checkbox" class="drawer-toggle hidden" />
     <div class="drawer-content flex flex-col">
         <!-- Navbar -->
         <div class="w-full navbar bg-primary rounded" data-theme="myPathLight">
-            <div class="flex-none lg:hidden">
-                <label for="nav-drawer" aria-label="open sidebar" class="btn btn-square btn-secondary">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                </label>
-            </div> 
             <div class="container flex flex-wrap justify-between items-center mx-auto">
                 <a href="{{ url_for('home_view') }}" class="flex items-center">
                     <button class="btn btn-ghost text-xl">
@@ -33,21 +28,30 @@
                     </div>
                     <!-- Profile dropdown -->
                     <div class="dropdown dropdown-end text-neutral ">
-                        <label tabindex="0" class="btn btn-secondary m-1">{{ user.username }}
-                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                <path strokeLinecap="round" stroke-linejoin="round" strokeWidth="2"
-                                        d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </label>
+                        <div
+                            onClick="this.parentElement.classList.toggle('dropdown-open');document.activeElement.blur()"
+                        >
+                            <label tabindex="0" class="btn btn-secondary m-1">{{ user.username }}
+                                <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path strokeLinecap="round" stroke-linejoin="round" strokeWidth="2"
+                                          d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </label>
+                        </div>
                         <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                             <li><a>Profile <span class="badge badge-accent badge-xs"></span></a></li>
                             <li><a>Settings</a></li>
                             <li><a>Logout</a></li>
                         </ul>
                     </div>
+                    <div class="flex-none xl:hidden">
+                        <label for="nav-drawer" aria-label="open sidebar" class="btn btn-square btn-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        </label>
+                    </div>
                 </div>
-                <div class="flex-none hidden lg:block">
+                <div class="flex-none hidden xl:block">
                     <ul class="menu menu-horizontal p-2 shadow bg-base-200 rounded-2xl">
                     <li><a>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -102,8 +106,8 @@
             </div>
         </div>
     </div>
-    <div class="drawer-side">
-        <label for="nav-drawer" aria-label="close sidebar" class="drawer-overlay"></label> 
+    <div class="drawer-side z-[100]">
+        <label for="nav-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
         <ul class="menu p-4 w-80 min-h-full bg-neutral-content text-base-content">
         <!-- Sidebar content here -->
         <li><a>
