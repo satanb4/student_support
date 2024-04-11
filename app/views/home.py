@@ -10,9 +10,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from app.core.config import templates
 
 # -- Fetching Test Data -- #
-from app.backend.db.operations import users
-from app.backend.stats import graphs
-
+from app.backend.db.mockdb import users
 # -- END -- #
 
 router = APIRouter()

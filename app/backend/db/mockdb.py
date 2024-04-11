@@ -4,6 +4,7 @@
 # Description: This file contains the database operations for the FastAPI application.
 
 from pydantic import BaseModel, Field
+from random import choice
 
 # -- This is just for Testing purposes --
 
@@ -27,5 +28,23 @@ users = [
         id=3, username="John Smith", email="johnsmith@example.com", user_type="staff"
     ),
 ]
+
+year = [f"{i}" for i in range(2000, 2023)]
+support = ["Yes", "No"]
+branch = ["CSE", "ECE", "ME", "CE", "EE"]
+advisors = ["Dr. A", "Dr. B", "Dr. C", "Dr. D", "Dr. E"]
+students = [
+    {
+        "id": i,
+        "name": f"Student{i}",
+        "year": choice(year),
+        "branch": choice(branch),
+        "advisor": choice(advisors),
+        "support": choice(support),
+    }
+    for i in range(1,200)
+]
+
+
 # -- This is just for Testing purposes --
 # -- END -- #
