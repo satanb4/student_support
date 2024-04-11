@@ -27,3 +27,9 @@ app/src/css/output.css
 
 # Ignore graphs generated on runtime
 graphs/*.html
+
+# Ignore .DS_Store files
+.DS_Store
+app/.DS_Store
+app/templates/.DS_Store
+app/templates/partials/.DS_Store
