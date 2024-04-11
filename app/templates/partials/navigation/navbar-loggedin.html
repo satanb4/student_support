@@ -1,15 +1,10 @@
 {% if user %}
 
 <div class="drawer">
-    <input id="nav-drawer" type="checkbox" class="drawer-toggle" /> 
+    <input id="nav-drawer" type="checkbox" class="drawer-toggle hidden" />
     <div class="drawer-content flex flex-col">
         <!-- Navbar -->
         <div class="w-full navbar bg-primary rounded" data-theme="myPathLight">
-            <div class="flex-none lg:hidden">
-                <label for="nav-drawer" aria-label="open sidebar" class="btn btn-square btn-secondary">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                </label>
-            </div> 
             <div class="container flex flex-wrap justify-between items-center mx-auto">
                 <a href="{{ url_for('home_view') }}" class="flex items-center">
                     <button class="btn btn-ghost text-xl">
@@ -46,8 +41,13 @@
                             <li><a>Logout</a></li>
                         </ul>
                     </div>
+                    <div class="flex-none xl:hidden">
+                        <label for="nav-drawer" aria-label="open sidebar" class="btn btn-square btn-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                        </label>
+                    </div>
                 </div>
-                <div class="flex-none hidden lg:block">
+                <div class="flex-none hidden xl:block">
                     <ul class="menu menu-horizontal p-2 shadow bg-base-200 rounded-2xl">
                     <li><a>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -102,7 +102,7 @@
             </div>
         </div>
     </div>
-    <div class="drawer-side">
+    <div class="drawer-side z-[100]">
         <label for="nav-drawer" aria-label="close sidebar" class="drawer-overlay"></label> 
         <ul class="menu p-4 w-80 min-h-full bg-neutral-content text-base-content">
         <!-- Sidebar content here -->
