@@ -1,0 +1,22 @@
+{# If using this component, remember to pass in the 'graphs' variable and remove the following line #}
+{% set graphs = ['Sample1', 'Sample2', 'Sample3', 'Sample4'] %}
+
+<div class="flex flex-col items-left justify-left">
+    <div class="mt-4">
+        <select class="select select-primary w-full max-w-xs"
+                hx-get   =""
+                hx-target="#graph-placeholder"
+                hx-swap="innerHTML"
+                hx-on    ="htmx:configRequest: event.detail.path = this.value"
+        >
+            {% for graph in graphs %}
+                <option value="{{url_for('graph_view')}}">{{graph}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <br>
+    <!-- Placeholder for actual chart -->
+    <div class="h-400 bg-error rounded-lg" id="graph-placeholder">
+        {% include 'partials/graphs/test_plot.html' %}
+    </div>
+</div>

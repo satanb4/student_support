@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  mypath:
+    build: .
+    container_name: mypath
+    ports:
+      - "8080:8080"
+    volumes:
+      - mypath_static_volume:/app/static
+    networks:
+      - mypath-dev-network
+    depends_on:
+      - mypath_db
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/mypath
+    command: ['uvicorn', 'app.main:app', '--port', '8080', '--host', 'localhost', '--reload']
+
+  mypath_db:
+    image: postgres:16
+    container_name: mypath_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - mypath_postgres_volume:/var/lib/postgresql/data
+    networks:
+      - mypath-dev-network
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=mypath
+
+volumes:
+    mypath_static_volume:
+        external: false
+    mypath_postgres_volume:
+        external: false
+
+networks:
+    mypath-dev-network:
+        external: false

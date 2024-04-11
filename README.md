@@ -21,7 +21,7 @@ The official repository operated under Glasgow University Software Services.
 1. Clone the repository
 2. Run `virtualenv venv`
 3. Run `source venv/bin/activate`
-4. Run `pip install -r requirements.txt`
+4. Run `pip install -r requirements/requirements.txt`
 5. cd into `frontend` and run `npm install`
 6. Run `pre-commit install`
 
@@ -32,6 +32,20 @@ The official repository operated under Glasgow University Software Services.
 4. Run `uvicorn app.main:app --reload --port 8080`
 5. Visit `http://localhost:8000`
 6. Enjoy!
+
+## Database Setup (Developer)
+- Run the postgres database:- <br>
+`sudo docker run --name mypath_db -v /var/lib/postgresql/data:/var/lib/postgresql/data -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=mypath -p 5432:5432 -d postgres:16`
+
+
+## Running Migrations (Developer)
+- Run the migration:- `alembic upgrade head`
+
+```
+Creating Migrations (Initial) - DO NOT RUN
+- Create the migrations folder:- `alembic init -t async migrations`
+- Generate a migration:- `alembic revision --autogenerate -m "Initial migration"`
+```
 
 ### IntelliJ / PyCharm Specifics
 If you are using an IntelliJ IDE, you can run the application by creating a new configuration with the following settings:

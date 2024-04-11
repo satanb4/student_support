@@ -1,0 +1,43 @@
+<div class="card bg-neutral-content shadow-xl p-4" id="main-view">
+    <div class="card-body">
+        <h2 class="text-4xl text-base-content mb-4">Students</h2>
+        <p class="text-neutral mb-4">
+            List of Students under your Advise
+        </p>
+        <div class="overflow-x-auto bg-base-100 rounded-box">
+            <table class="table table-lg" id="student-table">
+                <!-- head -->
+                <thead>
+                  <tr>
+                    <th></th>
+                    {% for column in ['Name', 'Year', 'Course', 'Advisor', 'Support'] %}
+                      <th class="text-lg">{{column}}</th>
+                    {% endfor %}
+                  </tr>
+                </thead>
+                <tbody>
+                {% for student in students %}
+                  <!-- row 2 -->
+                    <tr class="hover">
+                    <th>{{student.id}}</th>
+                    <td>{{student.name}}</td>
+                    <td>{{student.year}}</td>
+                    <td>{{student.branch}}</td>
+                    <td>{{student.advisor}}</td>
+                    {% if student.support == 'Yes' %}
+                      <td class="text-error">{{student.support}}</td>
+                    {% else %}
+                      <td class="text-success">{{student.support}}</td>
+                    {% endif %}
+                  </tr>
+                {% endfor %}
+              </table>
+              <div class="join">
+                {% for page in range(pages) %}
+                  <input class="join-item btn btn-square" type="radio" name="options" aria-label="{{page+1}}"  hx-get="{{url_for('list_view')}}"/>
+                {% endfor %}
+              </div>
+        </div>
+
+    </div>
+</div>
