@@ -52,7 +52,9 @@
 
   // Keyboard shortcut ESC to close the command palette
   document.onkeyup = function (e) {
+    const palette = document.getElementById('command-palette');
     if (e.key === 'Escape') {
+      if (palette.classList.contains('hidden')) return; // If the modal is already hidden, do nothing
       toggleCommandPaletteDirectly()
     }
   }
@@ -61,6 +63,8 @@
     // Check if 'Command' (or 'Ctrl' for Windows) and 'K' are pressed together
     if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
       event.preventDefault(); // Prevent the default action of the key press
+      const palette = document.getElementById('command-palette');
+      if (!palette.classList.contains('hidden')) return; // If the modal is already open, do nothing
       toggleCommandPaletteDirectly(); // Toggle the command palette
     }
   });
