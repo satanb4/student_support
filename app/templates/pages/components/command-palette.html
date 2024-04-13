@@ -47,18 +47,13 @@
     }
 
     // If there is a click outside the modal, and the modal is not hidden, hide it
-    if (!palette.classList.contains('hidden')) {
-      palette.classList.add('hidden');
-    }
+    toggleCommandPaletteDirectly();
   });
 
   // Keyboard shortcut ESC to close the command palette
   document.onkeyup = function (e) {
     if (e.key === 'Escape') {
-      const palette = document.getElementById('command-palette');
-      if (!palette.classList.contains('hidden')) {
-        palette.classList.add('hidden');
-      }
+      toggleCommandPaletteDirectly()
     }
   }
 
