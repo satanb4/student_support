@@ -1,0 +1,78 @@
+<!-- Command Palette Modal -->
+<div id="command-palette" class="search-content fixed inset-0 bg-gray-900 bg-opacity-50 hidden z-10" onclick="toggleCommandPaletteDirectly()">
+  <div class="flex items-center justify-center h-full">
+    <div class="relative bg-white rounded-md shadow-lg max-w-2xl w-full m-4 p-8" onclick="event.stopPropagation()">
+      <!-- Search Input -->
+      <input
+        type="search"
+        name="query"
+        placeholder="Search..."
+        class="input input-bordered w-full mb-4"
+        hx-post="/search_results"
+        hx-target="#search-results"
+        hx-trigger="keyup changed delay:500ms"
+        hx-indicator=".search-indicator"
+      />
+
+      <!-- Close Button -->
+      <button onclick="toggleCommandPaletteDirectly()"
+              class="btn btn-circle btn-sm absolute right-2 top-2">
+          ✕
+      </button>
+
+      <!-- Search Results -->
+      <div id="search-results" class="mt-4">
+        <!-- Results will be loaded here -->
+      </div>
+
+      <!-- Loading Indicator -->
+      <div class="search-indicator hidden">
+        <div class="loader"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  // Close the command palette if the click occurred outside of it
+  document.addEventListener('click', function(event) {
+    const palette = document.getElementById('command-palette');
+    const toggleButton = document.getElementById('toggle-btn');
+
+    // If there is a click inside the modal or the toggle button, stop the event from closing the modal
+    if (palette.contains(event.target) || toggleButton.contains(event.target)) {
+      return;
+    }
+
+    // If there is a click outside the modal, and the modal is not hidden, hide it
+    if (!palette.classList.contains('hidden')) {
+      palette.classList.add('hidden');
+    }
+  });
+
+  // Keyboard shortcut ESC to close the command palette
+  document.onkeyup = function(e) {
+    if (e.key === 'Escape') {
+      const palette = document.getElementById('command-palette');
+      if (!palette.classList.contains('hidden')) {
+        palette.classList.add('hidden');
+      }
+    }
+  }
+
+  // Toggle Command Palette directly with button without event argument
+  function toggleCommandPaletteDirectly() {
+    const palette = document.getElementById('command-palette');
+    // This will toggle the class 'hidden' on or off depending on its presence
+    palette.classList.toggle('hidden');
+  }
+
+  // Stop propagation for the modal to prevent closing when clicking inside
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const paletteContent = document.querySelector('.search-content');
+    if (paletteContent) {
+      paletteContent.addEventListener('click', function(event) {
+        event.stopPropagation();
+      });
+    }
+  });
+</script>
