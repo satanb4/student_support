@@ -2,7 +2,9 @@
 # Author: Sayan Bandyopadhyay
 # Date: 2024-03-23 19:44:07
 # Description: This file contains the database operations for the FastAPI application.
+# TODO: DELETE this file after the database models are implemented.
 
+import datetime
 from pydantic import BaseModel, Field
 from random import choice
 
@@ -29,10 +31,11 @@ users = [
     ),
 ]
 
-year = [f"{i}" for i in range(2000, 2023)]
+school = ["School of Engineering", "School of Science", "School of Business"]
+year = [f"{i}" for i in range(2024, 2027)]
 support = ["Yes", "No"]
 branch = ["CSE", "ECE", "ME", "CE", "EE"]
-advisors = ["Dr. A", "Dr. B", "Dr. C", "Dr. D", "Dr. E"]
+advisors = ["Dr. Alyson", "Dr. Brian", "Dr. Claire", "Dr. Desmond", "Dr. Elysse"]
 students = [
     {
         "id": i,
@@ -41,8 +44,80 @@ students = [
         "branch": choice(branch),
         "advisor": choice(advisors),
         "support": choice(support),
+        "school": choice(school),
     }
-    for i in range(1,200)
+    for i in range(1, 200)
+]
+
+
+eng_courses = [
+    "Introduction to Python",
+    "Introduction to Macroeconomics",
+    "Advanced Numerical Simulations",
+    "Differential Equations",
+    "Introduction to Quantum Mechanics",
+    "Introduction to Data Science",
+]
+sci_courses = [
+    "Introduction to Biology",
+    "Introduction to Chemistry",
+    "Introduction to Physics",
+    "Introduction to Mathematics",
+    "Introduction to Astronomy",
+    "Introduction to Geology",
+]
+bus_courses = [
+    "Introduction to Business",
+    "Introduction to Marketing",
+]
+courses = (
+    [
+        {
+            "id": i,
+            "name": eng_courses[i],
+            "year": choice(year),
+            "branch": choice(branch),
+            "professor": choice(advisors),
+            "school": "School of Engineering",
+        }
+        for i in range(len(eng_courses))
+    ]
+    + [
+        {
+            "id": len(eng_courses) + i,
+            "name": sci_courses[i],
+            "year": choice(year),
+            "branch": choice(branch),
+            "professor": choice(advisors),
+            "school": "School of Science",
+        }
+        for i in range(len(sci_courses))
+    ]
+    + [
+        {
+            "id": len(eng_courses) + len(sci_courses) + i,
+            "name": bus_courses[i],
+            "year": choice(year),
+            "branch": choice(branch),
+            "professor": choice(advisors),
+            "school": "School of Business",
+        }
+        for i in range(len(bus_courses))
+    ]
+)
+
+work_types = ["Assignment", "Project", "Quiz", "Exam"]
+work_status = ["Pending", "In Progress", "Completed"]
+
+calendar = [
+    {
+        "id": i,
+        "name": f"Work {i}",
+        "type": choice(work_types),
+        "status": choice(work_status),
+        "due_date": f"{choice(year)}-12-31",
+    }
+    for i in range(1, 17)
 ]
 
 

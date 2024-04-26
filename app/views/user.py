@@ -8,10 +8,19 @@ from fastapi import Request
 from fastapi.responses import HTMLResponse, RedirectResponse
 
 from app.core.config import templates
-from app.backend.db.mockdb import users, students
+from app.backend.db.mockdb import users, students, courses, school, calendar
 from app.backend.stats import graphs
 
 router = APIRouter()
+
+
+class HTTPResponseHXRedirect(RedirectResponse):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self["HX-Redirect"] = self["Location"]
+
+    status_code = 200
+
 
 # These are testing routes for different page views
 @router.get("/user/{id}", response_class=HTMLResponse)
@@ -37,14 +46,108 @@ async def graph_view(request: Request):
     )
     # TODO: Add more graph views for different models
 
-@router.get("/lists", response_class=HTMLResponse)
-async def list_view(request: Request):
-    
-    # This is a sample list view for students
-    selected = [student for student in students if student["id"] <= 10]
-    pages = len(students) // 10
+
+@router.get("/lists/{type}", response_class=HTMLResponse)
+async def list_view(
+    request: Request,
+    type: str,
+    view_page: int = 1,
+    view_rows: int = 10,
+    sort_by: str = "id",
+):
+
+    types = {"students": students, "courses": courses}
+    dataset = types.get(type, None)  # TODO: Add more models
+    cutoff = view_page * view_rows
+    if cutoff != 0:
+        page_count = (
+            (len(dataset) // view_rows) + 1
+            if len(dataset) % view_rows != 0
+            else len(dataset) // view_rows
+        )
+        selected = [
+            item
+            for item in dataset
+            if item["id"] <= cutoff and item["id"] > cutoff - view_rows
+        ]  # TODO: Change this to actual database query
+        sort_selected = sorted(selected, key=lambda x: x[sort_by])
+    else:
+        sort_selected = sorted(dataset, key=lambda x: x[sort_by])
+        page_count = 1
+    total_items = len(dataset)
+    schools = school
+
+    # TODO: Move this to a separate function
+    # This is a sample list view for Datasets
+    if dataset is None:
+        return RedirectResponse("/", status_code=303)
+
     return templates.TemplateResponse(
-        "partials/lists/students.html",
-        {"request": request, "users": users, "students": selected, "pages": pages},
+        f"partials/lists/{type}.html",
+        {
+            "request": request,
+            "user": users,
+            f"{type}": sort_selected,
+            f"total_{type}": total_items,
+            "schools": schools,
+            "page_count": page_count,
+            "view_page": view_page,
+            "view_rows": view_rows,
+        },
     )
+
     # TODO: Add more list views for different models
+
+
+@router.get("/student/{id}", response_class=HTMLResponse)
+async def student_view(request: Request, id: int):
+    tabs = [
+        {
+            "header": "Overview",
+        },
+        {
+            "header": "Courses",
+        },
+        {
+            "header": "Assessments",
+        },
+        {
+            "header": "Calendar",
+        },
+        {
+            "header": "Moodle",
+        },
+        {
+            "header": "Shared Notes",
+        },
+        {
+            "header": "Self Reports",
+        },
+    ]
+    for student in students:
+        if student["id"] == id:
+            return templates.TemplateResponse(
+                "pages/student.html",
+                {
+                    "request": request,
+                    "user": users[1],  # TODO: Change this to actual user
+                    "student": student,
+                    "tabs": tabs,
+                },
+            )
+    else:
+        return RedirectResponse("/", status_code=303)
+
+
+@router.get("/calendar", response_class=HTMLResponse)
+async def calendar_view(request: Request):
+    events = calendar
+    sorted_events = sorted(events, key=lambda x: x["due_date"])
+    return templates.TemplateResponse(
+        "pages/calendar.html",
+        {
+            "request": request,
+            "user": users[0],
+            "events": sorted_events,
+        },  # TODO: Change this to actual user
+    )

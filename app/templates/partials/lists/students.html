@@ -1,43 +1,44 @@
-<div class="card bg-neutral-content shadow-xl p-4" id="main-view">
-    <div class="card-body">
-        <h2 class="text-4xl text-base-content mb-4">Students</h2>
-        <p class="text-neutral mb-4">
-            List of Students under your Advise
-        </p>
-        <div class="overflow-x-auto bg-base-100 rounded-box">
-            <table class="table table-lg" id="student-table">
-                <!-- head -->
-                <thead>
-                  <tr>
-                    <th></th>
-                    {% for column in ['Name', 'Year', 'Course', 'Advisor', 'Support'] %}
-                      <th class="text-lg">{{column}}</th>
-                    {% endfor %}
-                  </tr>
-                </thead>
-                <tbody>
-                {% for student in students %}
-                  <!-- row 2 -->
-                    <tr class="hover">
-                    <th>{{student.id}}</th>
-                    <td>{{student.name}}</td>
-                    <td>{{student.year}}</td>
-                    <td>{{student.branch}}</td>
-                    <td>{{student.advisor}}</td>
-                    {% if student.support == 'Yes' %}
-                      <td class="text-error">{{student.support}}</td>
-                    {% else %}
-                      <td class="text-success">{{student.support}}</td>
-                    {% endif %}
-                  </tr>
-                {% endfor %}
-              </table>
-              <div class="join">
-                {% for page in range(pages) %}
-                  <input class="join-item btn btn-square" type="radio" name="options" aria-label="{{page+1}}"  hx-get="{{url_for('list_view')}}"/>
-                {% endfor %}
-              </div>
-        </div>
+{% if user %}
 
+<div id="main-view">
+  <div class="flex flex-col">
+    <h2 class="justify-left text-5xl text-base-content">Students</h2>
+    <div class="divider"></div>
+    <p class="text-neutral mb-4">
+      Students under your Advise <span class="badge badge-secondary">{{total_students}}</span>
+  </p>
+  <div class="card bg-neutral-content shadow-xl">
+    <div class="card-body flex">
+      <div class="mt-2">
+        <select class="select w-min"
+                hx-get   =""
+                hx-target="#main-view"
+                hx-swap="innerHTML"
+                hx-on    ="htmx:configRequest: event.detail.path = this.value"
+        >
+            {% set row_counts=[10,15,20,25,30] %}
+            <option value="{{url_for('list_view', type='students').include_query_params(view_rows=view)}}">
+                {{view_rows}}
+            </option>
+            {% for view in row_counts %}
+              {% if view != view_rows %}
+                <option value="{{url_for('list_view', type='students').include_query_params(view_rows=view)}}">{{view}}</option>
+              {% endif %}
+            {% endfor %}
+        </select>
+        <span class="label-text">Students per page</span>
+      </div>
+      {% include 'partials/lists/components/student_table.html' %}
+      <div class="join justify-center">
+        {% for page in range(page_count) %}
+          <input class="join-item btn btn-md" type="radio" name="options" aria-label="{{page+1}}"
+            hx-get="{{url_for('list_view', type='students').include_query_params(view_page=page+1, view_rows=view_rows)}}"
+            hx-select="#student-table"
+            hx-target="#student-table"
+            hx-swap="innerHTML" {{'checked' if page == view_page-1 else ''}}/>
+        {% endfor %}
+      </div>
     </div>
+  </div>
 </div>
+{% endif %}

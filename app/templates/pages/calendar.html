@@ -1,0 +1,69 @@
+{% extends 'pages/index.html' %}
+
+{% block title %} Calendar {% endblock title %}
+
+{% block main_page %}
+<div class="flex flex-col mb-4">
+    <h2 class="justify-left text-5xl text-base-content">Calendar</h2>
+    <div class="divider"></div>
+    <div class="flex flex-wrap py-4 mb-2">
+        <p class="basis-1/2">
+            GUID: <span class="badge badge-secondary font-semibold">123456</span>
+        </p>
+        <p class="basis-1/2">
+            Year: <span class="font-semibold">2023</span>
+        </p>
+        <p class="basis-1/2">
+            Items: <span class="badge badge-secondary font-semibold"> 2</span>
+        </p>
+        <p class="basis-1/2">
+            School: <span class="font-semibold">School of Computer Science</span>
+        </p>
+    </div>
+    <div class="card bg-neutral-content shadow-xl p-2">
+        <div class="card-body flex flex-wrap">
+            {% for event in events %}
+            <div class="card outline outline-neutral-content w-50 bg-base-100 transition ease-in-out delay-50 hover:-translate-y-2 duration-200 mb-4">
+                <div class="card-body">
+                    <div class="flex flex-row">
+                        <p class="font-slim text-md">{{event.due_date}}</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 justify-end hover:fill-secondary stroke-secondary active:animate-bounce">
+                            <path stroke-linecap="round" stroke-linejoin="round" onclick="reminder_modal.showModal()"
+                            d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
+                          </svg>
+                    </div>
+                    <div class="divider"></div>
+                    <h2 class="card-title text-md fond-bold">{{event.name}}</h2>
+                    <p>{{event.type}}</p>
+                    <span class="badge text-white
+                    {% if event.status == 'Completed' %}  badge-success {% elif event.status == 'Pending' %} badge-error {% else %} badge-accent {% endif %} badge-lg">{{event.status}}</span>
+                    <div class="card-actions justify-center">
+                        <!-- TODO: Add the link to the courses page -->
+                        <button class="btn btn-outline btn-secondary btn-wide" onclick="details_modal.showModal()">See More</button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <dialog id="reminder_modal" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box ">
+                <h3 class="font-bold text-lg">Reminder has been set Successfully!</h3>
+                <p class="py-4">Press ESC key or click outside to close</p>
+            </div>
+            <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+            </form>
+        </dialog>
+        <dialog id="details_modal" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box ">
+                <h3 class="font-bold text-lg">Details</h3>
+                <div class="divider"></div>
+                <p class="py-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet rerum, illo deleniti tenetur alias repellat velit odit maxime dignissimos sequi nihil distinctio labore dicta, incidunt aliquid eos ab inventore. Cum.</p>
+            </div>
+            <form method="dialog" class="modal-backdrop">
+                <button>close</button>
+            </form>
+        </dialog>
+    </div>
+</div>
+{% endblock main_page %}

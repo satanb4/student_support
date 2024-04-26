@@ -1,0 +1,32 @@
+{% extends 'pages/index.html' %}
+
+{% block title %} Student {% endblock title %}
+
+{% block main_page %}
+<div class="flex flex-col">
+    <h2 class="justify-left text-2xl text-base-content">{{student.name}}</h2>
+    <div class="divider"></div>
+    <div class="flex flex-wrap p-4 mb-2">
+        <p class="basis-1/2">
+            GUID: <span class="badge badge-secondary">{{student.id}}</span>
+        </p>
+        <p class="basis-1/2">
+            Moodle Last Accessed: <span class="font-semibold">28 June 2023</span>
+        </p>
+        <p class="basis-1/2">
+            Year: <span class="font-semibold">{{student.year}}</span>
+        </p>
+        <p class="basis-1/2">
+            Course: <span class="font-semibold">{{student.branch}}</span>
+        </p>
+        <p class="basis-1/2">
+            Advisor: <span class="font-semibold">{{student.advisor}}</span>
+        </p>
+        <p class="basis-1/2">
+            School: <span class="font-semibold">{{student.school}}</span>
+        </p>
+    </div>
+</div>
+{% include 'partials/tabs/student_tabs.html' %}
+
+{% endblock main_page %}
