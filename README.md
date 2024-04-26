@@ -29,7 +29,7 @@ The official repository operated under Glasgow University Software Services.
 1. cd to tailwindcss/
 2. Run `npx tailwindcss -i ../app/src/css/inputs.css -o ../app/src/css/output.css --watch`
 3. cd to the root directory in different terminal
-4. Run `uvicorn app.main:app --reload --port 8080`
+4. Run `hypercorn app.main:app --reload --port 8080`
 5. Visit `http://localhost:8000`
 6. Enjoy!
 
@@ -59,7 +59,7 @@ TailwindCSS:
 FastAPI:
 - Type: Python
 - Name: FastAPI
-- Module: `uvicorn`
+- Module: `hypercorn`
 - Parameters: `app.main:app --reload --port 8080`
 
 ## Contributing
