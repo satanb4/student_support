@@ -7,15 +7,15 @@
     <div id="navbar-container">
         <!-- Navbar will be loaded here -->
         {% include 'pages/components/navbar-default.html' %}
-        {% include 'partials/navigation/navbar-loggedin.html' %}
     </div>
 
     <div>
         {% include 'pages/components/command-palette.html' %}
     </div>
 
-    <div class="container mx-auto px-4 py-10" id="main-view">
-        <div class="container">
+    <div class="container mx-auto px-4 py-10" >
+        <div class="container" id="main-view">
+            {% block main_page %}
             <!-- Greeting and Overview -->
             <h1 class="text-4xl font-bold text-base-content mb-6">{% if user %}Hello {{ user.username }}
                 , {% endif %}</h1>
@@ -25,12 +25,12 @@
                 </p>
 
                 <!-- Chart Section -->
-                <div class="card bg-neutral-content shadow-xl mb-6">
+                <div class="card bg-neutral-content shadow-xl mb-4">
                     <div class="card-body">
                         <h2 class="card-title text-2xl text-base-content">
                             Mathematics 2T: Topics in Discrete Mathematics
                         </h2>
-                        <p class="text-neutral mb-4">
+                        <p class="text-neutral">
                             Moodle interactions in session 2023/2024
                         </p>
                         {% include 'pages/components/graph-selector.html' %}
@@ -43,7 +43,7 @@
                     <!-- Your Advisees -->
                     <div class="card bg-neutral-content shadow-xl p-4">
                         <div class="card-body">
-                            <h3 class="card-title text-xl text-base-content mb-4">Your Advisees</h3>
+                            <h3 class="card-title text-xl text-base-content mb-4">Your{% if user.user_type=='student'%} Advisor{%else%} Advisees{%endif%}</h3>
                             <div role="alert" class="alert alert-error">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
                                     viewBox="0 0 24 24">
@@ -70,15 +70,18 @@
                         </div>
                     </div>
                 </div>
-
+                {% if user.user_type != 'student' %}
                 <!-- Students needing support -->
                 <div class="card bg-neutral-content shadow-xl my-6 p-4">
                     <div class="card-body">
                         <h3 class="card-title text-xl text-base-content mb-4">Students needing support</h3>
-                        <p class="text-base-content">No students needing support found.</p>
+                        <div hx-get="{{url_for('list_view', type='students').include_query_params(view_rows=3, sort_by='support')}}"
+                            hx-trigger="intersect" hx-select="#student-table" hx-swap="innerHTML">
+                        </div>
                     </div>
                 </div>
-
+                {% endif %}
+                <br>
                 <!-- Data updated info -->
                 <div role="alert" class="alert">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -86,10 +89,11 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
-                    <span>Data updated: 14 days ago.</span>
+                    <!-- TODO: Add dynamic update of date -->
+                    <span>Data updated: <span class="badge badge-outline badge-success badge-lg">14</span> days ago.</span>
                 </div>
             {% else %}
-                <div class="hero h-700 bg-base-200 rounded-2xl">
+                <div class="hero h-full rounded-2xl bg-base-200">
                     <div class="hero-content text-center">
                         <div class="max-w-3xl">
                             <h1 class="text-5xl font-bold pb-5">Welcome to MyPath</h1>
@@ -115,11 +119,10 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             {% endif %}
-
+            {% endblock main_page %}
         </div>
     </div>
-
-
 {% endblock content %}

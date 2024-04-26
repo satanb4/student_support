@@ -43,6 +43,7 @@ def grade_data(data: pl.DataFrame = None) -> go.Figure:
         title="Student Grades Over the Years",
         xaxis_title="Year",
         yaxis_title="Grade",
+        template="ggplot2",  # Optional to change the theme
     )
     return fig
 

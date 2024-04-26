@@ -1,0 +1,19 @@
+<div role="tablist" class="tabs tabs-lifted tabs-lg mt-6 card bg-neutral-content shadow-xl p-4">
+
+    {% for tab in tabs %}
+        <input type="radio" name="student_tabs" role="tab" class="tab font-semibold mx-4 w-10" aria-label="{{tab.header}}" {% if loop.index == 1 %} checked {% endif %}/>
+        <div role="tabpanel" class="tab-content card-body bg-base-100 border-base-300 rounded-box p-10">
+            {{tab.content}}
+            <div class="flex flex-col gap-4 w-full">
+                <div class="flex gap-4 items-center">
+                  <div class="skeleton w-16 h-16 rounded-full shrink-0"></div>
+                  <div class="flex flex-col gap-4">
+                    <div class="skeleton h-4 w-60"></div>
+                    <div class="skeleton h-4 w-60"></div>
+                  </div>
+                </div>
+                <div class="skeleton h-80 w-full"></div>
+              </div>
+        </div>
+    {% endfor %}
+</div>

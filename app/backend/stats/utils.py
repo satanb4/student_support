@@ -14,11 +14,17 @@ def create_graph(file_name=None) -> str:
     def generate_graph(func):
         def wrapper(*args, **kwargs):
             fig = func(*args, **kwargs)
-            fig.update_layout(template="plotly_dark")
+            # fig.update_layout(template="plotly_light") # Optional to change the theme
+            fig.update_layout(
+                margin=dict(l=20, r=250, t=80, b=0),
+                autosize=True,
+                legend=dict(x=20, y=1),
+            )
             template_path = Path(template_base_dir, file_name)
             template = {
                 "fig": fig.to_html(
                     full_html=False,
+                    include_plotlyjs=False,
                 )
             }
             with open(template_path, "w+", encoding="utf-8") as f:
