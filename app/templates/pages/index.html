@@ -14,8 +14,8 @@
     </div>
 
     <div class="container mx-auto px-4 py-10" >
+        {% block main_page %}
         <div class="container" id="main-view">
-            {% block main_page %}
             <!-- Greeting and Overview -->
             <h1 class="text-4xl font-bold text-base-content mb-6">{% if user %}Hello {{ user.username }}
                 , {% endif %}</h1>
@@ -122,7 +122,7 @@
 
                 </div>
             {% endif %}
-            {% endblock main_page %}
         </div>
+        {% endblock main_page %}
     </div>
 {% endblock content %}

@@ -56,7 +56,9 @@ async def list_view(
     sort_by: str = "id",
 ):
 
-    types = {"students": students, "courses": courses}
+    types = {
+        "students": students,
+    }
     dataset = types.get(type, None)  # TODO: Add more models
     cutoff = view_page * view_rows
     if cutoff != 0:
@@ -97,6 +99,25 @@ async def list_view(
     )
 
     # TODO: Add more list views for different models
+
+
+@router.get("/courses", response_class=HTMLResponse)
+async def courses_view(request: Request):
+    dataset = courses
+    sort_selected = sorted(dataset, key=lambda x: x["id"])
+    total_items = len(dataset)
+    schools = school
+
+    return templates.TemplateResponse(
+        "pages/courses.html",
+        {
+            "request": request,
+            "user": users[0],
+            f"courses": sort_selected,
+            f"total_courses": total_items,
+            "schools": schools,
+        },
+    )
 
 
 @router.get("/student/{id}", response_class=HTMLResponse)

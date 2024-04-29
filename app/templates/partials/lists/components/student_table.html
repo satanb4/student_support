@@ -4,12 +4,12 @@
         <thead>
           <tr>
             <th></th>
-            {% for column in ['Name', 'Year', 'Course', 'Advisor', 'School', 'Support'] %}
+            {% for column in ['Name', 'Year', 'Branch', 'Advisor', 'School', 'Support'] %}
               <th class="text-lg">
                 {{column}}
                 <label class="swap swap-flip text-sm" >
                   <!-- this hidden checkbox controls the state -->
-                  <input type="checkbox" hx-get="{{url_for('list_view', type='students').include_query_params(view_rows=view, sort_by=column.lower())}}"
+                  <input type="checkbox" hx-get="{{url_for('list_view', type='students').include_query_params(view_rows=view_rows,view_page=view_page, sort_by=column.lower())}}"
                   hx-target="#main-view" hx-swap="innerHTML" hx-trigger="click"/>
                   <div class="swap-on" >⬆️</div>
                   <div class="swap-off">⬇️</div>

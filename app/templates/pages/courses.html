@@ -1,0 +1,42 @@
+{% extends 'pages/index.html' %}
+
+{% block main_page %}
+    <div class="container" id="main-view">
+        <div class="flex flex-col">
+            <h2 class="justify-left text-5xl text-base-content">Courses</h2>
+            <div class="divider"></div>
+            <p class="text-neutral mb-4">
+                Courses under your purview <span class="badge badge-secondary">{{total_courses}}</span>
+            </p>
+
+            <!-- TODO: Split this section into a component and sort by school-->
+
+            {% for school in schools %}
+            <div class="card bg-neutral-content shadow-xl mb-4">
+                <div class="card-body">
+                    <h2 class="card-title text-base-content mb-4 text-2xl">{{school}}</h2>
+                    <div class="grid grid-cols-4 gap-4">
+                        {% for course in courses  %}
+                        {% if course.school == school %}
+                        <div class="card w-50 bg-base-100 transition ease-in-out delay-50 hover:-translate-y-2 duration-200">
+                            <div class="card-body">
+                                <p class="text-secondary">Session: {{course.year}}</p>
+                                <h2 class="card-title text-md">{{course.name}}</h2>
+                                <p>{{course.branch}}</p>
+
+                                <p>Taught By {{course.professor}}</p>
+                                <div class="card-actions justify-end">
+                                    <!-- TODO: Add the link to the courses page -->
+                                    <button class="btn btn-outline btn-secondary">See More</button>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock main_page %}
