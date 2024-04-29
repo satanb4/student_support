@@ -9,7 +9,7 @@
                 {{column}}
                 <label class="swap swap-flip text-sm" >
                   <!-- this hidden checkbox controls the state -->
-                  <input type="checkbox" hx-get="{{url_for('list_view', type='students').include_query_params(view_rows=view_rows,view_page=view_page, sort_by=column.lower())}}"
+                  <input type="checkbox" hx-get="{{url_for('list_view', type='students').include_query_params(view_rows=view_rows,view_page=view_page, sort_by=column.lower(), invert=invert)}}"
                   hx-target="#main-view" hx-swap="innerHTML" hx-trigger="click"/>
                   <div class="swap-on" >⬆️</div>
                   <div class="swap-off">⬇️</div>
@@ -21,10 +21,10 @@
         <tbody>
         {% for student in students %}
 
-            <tr class="hover" hx-redirect="{{url_for('student_view', id=student.id)}}"> <!-- TODO: Add the link to the student page here -->
+            <tr class="hover">
 
             <th>{{student.id}}</th>
-            <td>{{student.name}} </td>
+            <td><a href="{{url_for('student_view', id=student.id)}}">{{student.name}}</a></td>
             <td>{{student.year}}</td>
             <td>{{student.branch}}</td>
             <td>{{student.advisor}}</td>

@@ -54,6 +54,7 @@ async def list_view(
     view_page: int = 1,
     view_rows: int = 10,
     sort_by: str = "id",
+    invert: bool = False,
 ):
 
     types = {
@@ -78,6 +79,8 @@ async def list_view(
         page_count = 1
     total_items = len(dataset)
     schools = school
+    sort_selected = sort_selected[::-1] if invert else sort_selected
+    invert = not invert
 
     # TODO: Move this to a separate function
     # This is a sample list view for Datasets
@@ -95,6 +98,7 @@ async def list_view(
             "page_count": page_count,
             "view_page": view_page,
             "view_rows": view_rows,
+            "invert": invert,
         },
     )
 
