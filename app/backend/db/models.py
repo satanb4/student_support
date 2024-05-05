@@ -5,7 +5,7 @@
 
 from enum import Enum
 from typing import Optional, List
-from sqlmodel import SQLModel, Field
+from sqlmodel import SQLModel, Field, Relationship
 
 
 class UserType(str, Enum):
@@ -23,7 +23,7 @@ class User(SQLModel, table=True):
     Model class to define the User Table in the Database.
     """
 
-    id: Optional[int] = Field(default=None, primary_key=True)
+    id: int = Field(default=None, primary_key=True)
     username: str
     email: str
     user_type: UserType
@@ -33,6 +33,7 @@ class Courses(SQLModel, table=True):
     """
     Model class to define the Courses Table in the Database.
     """
+
     id: Optional[int] = Field(default=None, primary_key=True)
     course_name: str
     course_code: str
@@ -41,3 +42,4 @@ class Courses(SQLModel, table=True):
     course_instructor: str
     students_enrolled: int
     course_duration: int
+    branch_id: int | None = Field(default=None, foreign_key="branches.id")

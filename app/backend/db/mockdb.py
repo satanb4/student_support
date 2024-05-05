@@ -7,6 +7,7 @@
 import datetime
 from pydantic import BaseModel, Field
 from random import choice
+from faker import Faker
 
 # -- This is just for Testing purposes --
 
