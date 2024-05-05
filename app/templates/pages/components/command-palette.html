@@ -5,22 +5,25 @@
         <div class="relative bg-white rounded-lg shadow-xl max-w-2xl w-full" style="margin-top: 3rem; max-height: 30vh;"
              onclick="event.stopPropagation()"> <!-- Set a max-height -->
             <!-- Search Input -->
-            <div class="flex items-center border-b border-gray-200 p-4">
-                <svg class="w-5 h-5 text-gray-500 mr-3" fill="none" stroke-linecap="round" stroke-linejoin="round"
+            <div class="flex input input-bordered items-center gap-2 h-20">
+                <svg class="w-8 h-8 text-gray-500 mr-3" fill="none" stroke-linecap="round" stroke-linejoin="round"
                      stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                     <!-- Search icon -->
                     <path d="M19 19l-3.5-3.5m1.5-6.5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
+
                 <input
+                        id="search-input"
                         type="search"
                         name="query"
-                        placeholder="Search..."
-                        class="input input-bordered w-full"
+                        placeholder="Type to start searching..."
+                        class="w-full h-full grow"
                         hx-post="/search_results"
                         hx-target="#search-results"
                         hx-trigger="keyup changed delay:500ms"
                         hx-indicator=".search-indicator"
                 />
+                <kbd class="kbd kbd-md">Esc</kbd>
             </div>
 
             <!-- Search Results -->
@@ -39,15 +42,15 @@
   // Close the command palette if the click occurred outside of it
   document.addEventListener('click', function (event) {
     const palette = document.getElementById('command-palette');
+    const searchInput = document.getElementById('search-input');
     const toggleButton = document.getElementById('toggle-btn');
-
     // If there is a click inside the modal or the toggle button, stop the event from closing the modal
     if (palette.contains(event.target) || toggleButton.contains(event.target)) {
       return;
     }
-
     // If there is a click outside the modal, and the modal is not hidden, hide it
     toggleCommandPaletteDirectly();
+
   });
 
   // Keyboard shortcut ESC to close the command palette
@@ -81,6 +84,7 @@
       searchResults.innerHTML = '';
       searchInput.value = '';
     }
+    searchInput.focus(); // Focus on the search input
   }
 
   // Stop propagation for the modal to prevent closing when clicking inside
