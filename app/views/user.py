@@ -4,12 +4,15 @@
 # Description: This file contains the views that are required for User Page of the FastAPI application.
 
 from fastapi import APIRouter
-from fastapi import Request
+from fastapi import Request, Form
 from fastapi.responses import HTMLResponse, RedirectResponse
+
+from typing import Annotated
 
 from app.core.config import templates
 from app.backend.db.mockdb import users, students, courses, school, calendar
 from app.backend.stats import graphs
+from app.backend.gullm.interface import GullmInterface
 
 router = APIRouter()
 
@@ -175,4 +178,21 @@ async def calendar_view(request: Request):
             "user": users[0],
             "events": sorted_events,
         },  # TODO: Change this to actual user
+    )
+
+
+@router.post("/query", response_class=HTMLResponse)
+async def ai_query(request: Request) -> HTMLResponse:
+    data = await request.form()
+    prompt = str(data["prompt"].capitalize())
+    gullm = GullmInterface("http://localhost:11434", "gullm", stream=False)
+    message, status = gullm.query(prompt)
+
+    if status != 200:  # TODO: Add more error handling, log this
+        message = "Error: " + message
+    if not prompt:
+        return None
+    return templates.TemplateResponse(
+        "partials/chat/ai_response.html",
+        {"request": request, "response": message, "status": status},
     )

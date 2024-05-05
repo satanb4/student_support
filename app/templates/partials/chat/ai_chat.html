@@ -1,0 +1,99 @@
+<div class="fixed bottom-16 right-0">
+    <button id="open-chat" class="btn text-white py-2 px-4 rounded-full flex items-center bg-gradient-to-r from-indigo-500 to-pink-600 hover:from-indigo-200 hover:to-pink-400 transition duration-300 ">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
+          </svg>
+
+    </button>
+</div>
+<div id="chat-container" class="hidden fixed bottom-20 right-20 w-96">
+    <div class="bg-base-200 shadow-xl rounded-lg max-w-lg w-full">
+        <div class="p-4 border-b bg-primary text-white rounded-t-lg flex justify-between items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                <path fill-rule="evenodd" d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z" clip-rule="evenodd" />
+              </svg>
+
+            <p class="text-lg font-semibold">GuLLM Chat</p>
+            <button id="close-chat" class="text-gray-300 hover:text-error focus:outline-none focus:text-gray-400">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <div id="chatbox" class="p-4 h-80 overflow-y-auto">
+            {% include 'partials/chat/ai_response.html' %}
+        </div>
+        <form id="chatinput" class="join p-4 border-t flex"
+        hx-post="{{url_for('ai_query')}}" hx-target="#chatbox" hx-swap="beforeend" hx-trigger="submit">
+            <input id="prompt" name="prompt" type="text" placeholder="Type a message" class="w-full px-3 py-2 border rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 join-item">
+            <button id="send-button" class="btn btn-secondary text-white px-4 py-2 rounded-l-md join-item" type="submit" name="submit">Send</button>
+        </form>
+    </div>
+</div>
+<script>
+    const chatbox = document.getElementById("chatbox");
+const chatContainer = document.getElementById("chat-container");
+const userInput = document.getElementById("prompt");
+const sendButton = document.getElementById("send-button");
+const openChatButton = document.getElementById("open-chat");
+const closeChatButton = document.getElementById("close-chat");
+
+let isChatboxOpen = true; // Set the initial state to closed
+
+// Function to toggle the chatbox visibility
+function toggleChatbox() {
+chatContainer.classList.toggle("hidden");
+isChatboxOpen = !isChatboxOpen; // Toggle the state
+}
+
+// Add an event listener to the open chat button
+openChatButton.addEventListener("click", toggleChatbox);
+
+// Add an event listener to the close chat button
+closeChatButton.addEventListener("click", toggleChatbox);
+
+// Add an event listener to the send button
+sendButton.addEventListener("click", function () {
+const userMessage = userInput.value;
+if (userMessage.trim() !== "" && isChatboxOpen) {
+    addUserMessage(userMessage);
+    // respondToUser(userMessage);
+    userInput.value = "";
+}
+});
+
+userInput.addEventListener("keyup", function (event) {
+if (event.key === "Enter" && userInput.value.trim() !== ""){
+    const userMessage = userInput.value;
+    addUserMessage(userMessage);
+    // respondToUser(userMessage);
+    userInput.value = "";
+}
+});
+
+function addUserMessage(message) {
+const messageElement = document.createElement("div");
+messageElement.innerHTML = `<div class="chat chat-end"><div class="chat-bubble chat-bubble-secondary">${message}</div></div>`;
+chatbox.appendChild(messageElement);
+chatbox.scrollTop = chatbox.scrollHeight;
+}
+
+// function addBotMessage(message) {
+// const messageElement = document.createElement("div");
+// messageElement.classList.add("mb-2");
+// messageElement.innerHTML = `<p class="bg-gray-200 text-gray-700 rounded-lg py-2 px-4 inline-block">${message}</p>`;
+// chatbox.appendChild(messageElement);
+// chatbox.scrollTop = chatbox.scrollHeight;
+// }
+
+// function respondToUser(userMessage) {
+// // Replace this with your chatbot logic
+// setTimeout(() => {
+//     addBotMessage("This is a response from the chatbot.");
+// }, 500);
+// }
+
+// Automatically open the chatbox on page load
+// toggleChatbox();
+
+    </script>
