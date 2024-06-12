@@ -4,6 +4,11 @@
 The new MyPath project application built from the ground up to be asynchronous and fast 🔥
 Concept site under University of Glasgow
 
+## Demo
+https://github.com/satanb4/student_support/assets/26685910/cdd56f9a-6b00-4095-a01c-3c9fd0e205c3
+
+
+
 ## Stack
 - Python 3.11
 - FastAPI
