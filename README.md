@@ -2,7 +2,7 @@
 
 ## Description
 The new MyPath project application built from the ground up to be asynchronous and fast 🔥
-The official repository operated under Glasgow University Software Services.
+Concept site under University of Glasgow
 
 ## Stack
 - Python 3.11
